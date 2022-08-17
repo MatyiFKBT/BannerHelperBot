@@ -1,22 +1,12 @@
-import requests
-import os
-from telegram import (
-    Update,
-    ReplyKeyboardMarkup,
-    InlineKeyboardMarkup,
-    InlineKeyboardButton,
-)
-from telegram.constants import ParseMode
-from telegram.ext import (
-    filters,
-    MessageHandler,
-    CommandHandler,
-    ContextTypes,
-    ApplicationBuilder,
-    CallbackQueryHandler,
-)
-
 import logging
+import os
+
+import requests
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
+from telegram.constants import ParseMode
+from telegram.ext import (ApplicationBuilder, CallbackQueryHandler,
+                          CommandHandler, ContextTypes, MessageHandler,
+                          filters)
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
