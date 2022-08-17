@@ -1,4 +1,5 @@
 import requests
+import os
 from telegram import Update, ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.constants import ParseMode
 from telegram.ext import filters, MessageHandler, CommandHandler, ContextTypes, ApplicationBuilder, CallbackQueryHandler
@@ -154,7 +155,11 @@ async def next_mission(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 if __name__ == '__main__':
-    application = ApplicationBuilder().token(TELEGRAM_ACCESS_TOKEN).build()
+    # Check if token exists in env
+    if 'TELEGRAM_BOT_TOKEN' not in os.environ:
+        print('Please set the TELEGRAM_BOT_TOKEN environment variable.')
+        exit(1)
+    application = ApplicationBuilder().token(os.getenv('TELEGRAM_BOT_TOKEN')).build()
     start_handler = CommandHandler('start', start)
     first_mission_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), first_mission)
 
